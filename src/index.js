@@ -8,12 +8,17 @@ const countryList = document.querySelector('ul.country-list');
 const countryInfo = document.querySelector('div.country-info');
 const DEBOUNCE_DELAY = 300;
 
-
-const isInputCorrect = (a) => {
+const isInputCorrect = a => {
   return /^[A-Za-z\s\-]*$/.test(a);
 };
 
-const countryCardCreator = ({ name, capital, population, flags, languages }) => {
+const countryCardCreator = ({
+  name,
+  capital,
+  population,
+  flags,
+  languages,
+}) => {
   const allLanguages = languages.map(language => language.name).join(', ');
   const country = document.createElement('article');
   country.innerHTML = `
@@ -43,8 +48,6 @@ const countryListCreator = countries => {
   countryList.append(...allCountries);
 };
 
-
-
 input.addEventListener(
   'input',
   debounce(event => {
@@ -67,10 +70,7 @@ input.addEventListener(
           Notiflix.Notify.failure(`Oops, there is no country with that name!`)
         );
     } else {
-      return Notiflix.Notify.info(
-        `Alphabet only, please!`
-      );
+      return Notiflix.Notify.info(`Alphabet only, please!`);
     }
   }, DEBOUNCE_DELAY)
 );
-
